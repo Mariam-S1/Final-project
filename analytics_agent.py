@@ -16,7 +16,7 @@ from db import SQLiteClient
 # ======================================================
 # Database client
 # ======================================================
-db = SQLiteClient("data/erp_v2.db")
+db = SQLiteClient("data/erp.db")
 retriever = load_vectorstore().as_retriever(search_kwargs={"k": 4})
 nl2sql = NL2SQLAgent()
 
