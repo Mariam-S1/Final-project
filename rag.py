@@ -42,6 +42,10 @@ def load_vectorstore():
     return FAISS.load_local(
         VECTORSTORE_DIR, embeddings, allow_dangerous_deserialization=True
     )
+def get_retriever():
+    """Get a retriever for the vector store."""
+    vectorstore = load_vectorstore()
+    return vectorstore.as_retriever()
 
 if __name__ == "__main__":
     build_vectorstore()
