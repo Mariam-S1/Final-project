@@ -1,0 +1,7 @@
+langchain
+langchain-google-genai
+streamlit
+faiss-cpu
+pandas
+python-dotenv
+sqlite3-binary
