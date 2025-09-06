@@ -1,22 +1,28 @@
-"""
-frontend.py
------------
-Streamlit dashboard for querying ERP analytics.
-"""
-
+# frontend.py
 import streamlit as st
-import requests
-import pandas as pd
+from router import route_message  # Router function to handle input
 
-API_URL = "http://127.0.0.1:8000/ask"
+st.set_page_config(page_title="ERP Chatbot", layout="wide")
+st.title("ERP Assistant Chatbot 🤖")
+st.markdown("Ask questions about sales, finance, inventory, analytics, or CRM!")
 
-st.title("ERP Analytics Dashboard")
-query = st.text_input("Ask a question:")
+if "chat_history" not in st.session_state:
+    st.session_state.chat_history = []
 
-if st.button("Submit") and query:
-    resp = requests.get(API_URL, params={"q": query}).json()
-    st.subheader("Generated SQL")
-    st.code(resp["sql"])
-    st.subheader("Results")
-    df = pd.DataFrame(resp["results"])
-    st.dataframe(df)
+# Display chat history
+for msg in st.session_state.chat_history:
+    role = msg["role"]
+    content = msg["content"]
+    if role == "user":
+        st.chat_message("user").write(content)
+    else:
+        st.chat_message("assistant").write(content)
+
+# User input box
+if user_input := st.chat_input("Type your message here..."):
+    st.session_state.chat_history.append({"role": "user", "content": user_input})
+    with st.chat_message("assistant"):
+        with st.spinner("Thinking..."):
+            response = route_message(user_input, st.session_state.chat_history)
+            st.write(response)
+    st.session_state.chat_history.append({"role": "assistant", "content": response})
