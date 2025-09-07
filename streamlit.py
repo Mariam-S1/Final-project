@@ -1,6 +1,6 @@
 # frontend.py
 import streamlit as st
-from router import route_message  # Router function to handle input
+from Router import route_message  # Router function to handle input
 
 st.set_page_config(page_title="ERP Chatbot", layout="wide")
 st.title("ERP Assistant Chatbot 🤖")
