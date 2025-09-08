@@ -1,7 +1,17 @@
+# Core LangChain packages
 langchain
+langchain-text-splitters
+langchain-community
 langchain-google-genai
-streamlit
-faiss-cpu
-pandas
+
+# Vector Store
+chromadb               
+
+# LLMs
+google-generativeai
+tiktoken                
+
+# Utils
 python-dotenv
-sqlite3-binary
+sqlalchemy
+pydantic
